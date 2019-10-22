@@ -1,4 +1,4 @@
-bin32/
-iso/
+bin/
+deploy/
 *.iso
 intimidiate/

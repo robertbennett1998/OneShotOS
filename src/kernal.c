@@ -96,7 +96,15 @@ void terminal_putchar(char c)
 void terminal_write(const char* data, size_t size) 
 {
 	for (size_t i = 0; i < size; i++)
+	{
+		if (data[i] == '\n')
+		{
+			terminal_row++;
+			continue;
+		}
+
 		terminal_putchar(data[i]);
+	}
 }
  
 void terminal_writestring(const char* data) 
