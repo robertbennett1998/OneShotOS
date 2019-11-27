@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build OneShotOS",
+            "command": "make",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "Run OneShotOS",
+            "command": "qemu-system-i386",
+            "args": [
+                "-kernel",
+                "/home/rob/OneShotOS/bin/i686-elf/OneShotOS-i686-elf.bin"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}
