@@ -41,6 +41,6 @@ typedef struct _terminal
 
 const uint8_t CreateTerminal(const uint64_t u64Width, const uint64_t u64Height);
 void WriteToTerminal(const uint8_t u8TerminalId, const char* pString);
-inline void ClearTerminal(const uint8_t u8TerminalId);
+void ClearTerminal(const uint8_t u8TerminalId);
 
 #endif

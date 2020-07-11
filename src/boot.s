@@ -41,7 +41,26 @@ The linker script specifies _start as the entry point to the kernel and the
 bootloader will jump to this position once the kernel has been loaded. It
 doesn't make sense to return from this function as the bootloader is gone.
 */
+
 .section .text
+.globl _load_gdt
+_load_gdt:
+	mov 4(%esp), %eax /* Move the first parameter into the 32-bit accumulator. */
+	lgdt (%eax)
+	
+	ljmp $0x08, $return
+	ret
+	
+	return:
+		/* Now load the selectors into the segment registers */
+		mov $0x10, 	%ax /* Move the data selector into the acumulator */
+		mov %ax, 	%ds /* move the value in the acumulator into the data selector register */
+		mov %ax, 	%es
+		mov %ax,	%fs
+		mov %ax,	%gs
+		mov %ax, 	%ss
+		ret
+
 .global _start
 .type _start, @function
 _start:
@@ -75,7 +94,9 @@ _start:
 	C++ features such as global constructors and exceptions will require
 	runtime support to work as well.
 	*/
- 
+
+	call IntialiseGDT
+
 	/*
 	Enter the high-level kernel. The ABI requires the stack is 16-byte
 	aligned at the time of the call instruction (which afterwards pushes

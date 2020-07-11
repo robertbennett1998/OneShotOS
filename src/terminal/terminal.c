@@ -1,5 +1,6 @@
 #include "terminal/terminal.h"
-#include "memory/heap.h"
+
+#define nullptr 0
 
 static uint8_t s_u8TerminalCount = 0;
 static Terminal s_pTerminals[MAX_TERMINALS];
